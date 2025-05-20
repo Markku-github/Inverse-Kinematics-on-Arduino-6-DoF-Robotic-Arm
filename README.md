@@ -15,7 +15,7 @@ Inverse_Kinematics_Arduino_6DoF/
 
 ---
 
-## 🩾 Hardware Used
+## :computer: Hardware Used
 
 - 6x MG996R Servo Motors
 - PCA9685 16-Channel PWM Driver
