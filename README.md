@@ -3,7 +3,7 @@
 This project demonstrates inverse kinematics control of a 6 degrees-of-freedom (6 DoF) robotic arm using an Arduino Uno, MG996R servo motors, and a PCA9685 PWM driver. The arm receives 3D Cartesian coordinates via serial commands and translates them into joint angles using basic IK calculations.
 
 ---
-## 📁 Project Structure
+## :file_folder: Project Structure
 
 ```
 Inverse_Kinematics_Arduino_6DoF/
@@ -25,7 +25,7 @@ Inverse_Kinematics_Arduino_6DoF/
 
 ---
 
-## 💡 Features
+## :bulb: Features
 
 - Calculates and executes inverse kinematics for a 3-joint planar section of the arm.
 - Accepts serial commands for positioning and gripper control.
@@ -33,7 +33,7 @@ Inverse_Kinematics_Arduino_6DoF/
 
 ---
 
-## 🔧 How to Use
+## :wrench: How to Use
 
 1. Clone or download this repository.
 2. Ensure the `.ino` file name matches the folder name.
@@ -51,6 +51,6 @@ GRIP CLOSE
 
 ---
 
-## 🧬 License
+## :pushpin: License
 
 MIT License. You are free to use, modify, and distribute.
