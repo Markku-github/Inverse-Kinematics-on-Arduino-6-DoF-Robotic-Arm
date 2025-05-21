@@ -5,7 +5,7 @@
 
 void setup() {
   Serial.begin(9600);
-  setupServos();
+  initServos();
   Serial.println("Ready.");
 }
 
