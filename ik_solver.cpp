@@ -2,32 +2,38 @@
 #include "ik_solver.h"
 #include <math.h>
 
-// Define arm segment lengths (in mm)
-#define L1 105.0  // Upper arm length (in mm)
-#define L2 147.0  // Forearm length (in mm)
+// Lengths of each segment of the robotic arm (in mm).
+const float L1 = 91.0;  // Base to shoulder.
+const float L2 = 105.0;  // Shoulder to elbow.
+const float L3 = 143.0;  // Elbow to wrist.
 
+// Solves inverse kinematics for a 3DOF planar robotic arm.
 Angles solveIK(float x, float y, float z) {
   Angles result;
 
-  float r = sqrt(x*x + y*y);     // Horizontal distance from base
-  result.theta0 = atan2(y, x);   // Base rotation angle
+  // Calculate the base rotation angle in the XY plane.
+  result.theta0 = atan2(y, x);
 
-  float d = sqrt(r*r + z*z);     // Total straight-line distance
+  // Convert the target point into a 2D plane (arm projection).
+  float planarDist = sqrt(x * x + y * y);      // Distance in the XY plane.
+  float zOffset = z - L1;                      // Height relative to shoulder.
+  float d = sqrt(planarDist * planarDist + zOffset * zOffset);  // Total distance to target from shoulder joint.
 
-  // Check if point is reachable
-  if (d > (L1 + L2)) {
-    result.valid = false;
+  // Check if the target point is within reach based on arm geometry.
+  if (d > (L2 + L3) || d < fabs(L2 - L3)) {
+    result.valid = false;  // Target is unreachable.
     return result;
   }
 
-  // Using cosine law and triangle geometry
-  float a = acos((L1*L1 + d*d - L2*L2) / (2 * L1 * d));
-  float b = atan2(z, r);
-  result.theta1 = b + a;
+  // Apply the Law of Cosines to determine angle between L2 and target point.
+  float a = acos((L2 * L2 + d * d - L3 * L3) / (2 * L2 * d));
+  float b = atan2(zOffset, planarDist);  // Angle from shoulder to target point.
+  result.theta1 = b + a;  // Shoulder angle.
 
-  result.theta2 = acos((L1*L1 + L2*L2 - d*d) / (2 * L1 * L2));
-  result.theta2 = M_PI - result.theta2; // Elbow down configuration
+  // Apply the Law of Cosines again to determine elbow angle.
+  float c = acos((L2 * L2 + L3 * L3 - d * d) / (2 * L2 * L3));
+  result.theta2 = M_PI - c;  // Elbow angle (inward bend).
 
-  result.valid = true;
+  result.valid = true;  // Mark result as valid.
   return result;
 }
