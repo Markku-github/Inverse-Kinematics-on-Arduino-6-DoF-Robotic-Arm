@@ -1,6 +1,8 @@
 // =================== ik_solver.cpp ===================
 #include "ik_solver.h"
 #include <math.h>
+#include <Arduino.h>
+
 
 // Lengths of each segment of the robotic arm (in mm).
 const float L1 = 91.0;  // Base to shoulder.
@@ -35,5 +37,8 @@ Angles solveIK(float x, float y, float z) {
   result.theta2 = M_PI - c;  // Elbow angle (inward bend).
 
   result.valid = true;  // Mark result as valid.
+  Serial.print("θ0: "); Serial.println(result.theta0 * 180 / M_PI);
+  Serial.print("θ1: "); Serial.println(result.theta1 * 180 / M_PI);
+  Serial.print("θ2: "); Serial.println(result.theta2 * 180 / M_PI);
   return result;
 }
