@@ -3,18 +3,35 @@
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
 
+const int MinAngle = 45;  // Gripper channel number.
+const int MaxAngle = 170;  // Gripper channel number.
+
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 int servoAngles[16] = {0};
+int servoMinAngles[16];
+int servoMaxAngles[16];
 
 void initServos() {
   pwm.begin();
   pwm.setPWMFreq(50);
+
+  // Default limits for all servos: 0–180 degrees.
+  for (int i = 0; i < 16; i++) {
+    servoMinAngles[i] = 0;
+    servoMaxAngles[i] = 180;
+  }
 }
 
-// Moves a servo to the given angle.
+void setServoLimits(int channel, int minAngle, int maxAngle) {
+  if (channel < 0 || channel >= 16) return;
+  servoMinAngles[channel] = constrain(minAngle, 0, 180);
+  servoMaxAngles[channel] = constrain(maxAngle, 0, 180);
+}
+
+// Moves a servo to the given angle within its defined limits.
 void moveServo(int channel, int angle) {
   if (channel < 0 || channel >= 16) return;
-  angle = constrain(angle, 0, 180);
+  angle = constrain(angle, servoMinAngles[channel], servoMaxAngles[channel]);
   int pulse = map(angle, 0, 180, 102, 512);
   pwm.setPWM(channel, 0, pulse);
   servoAngles[channel] = angle;

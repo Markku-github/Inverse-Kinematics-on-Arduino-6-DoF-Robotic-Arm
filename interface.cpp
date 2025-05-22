@@ -6,6 +6,11 @@
 
 const int Gripper = 5;  // Gripper channel number.
 
+// Rajoittaa kulman servoille määriteltyihin rajoihin
+float clampAngle(float angle, int channel) {
+  return constrain(angle, servoMinAngles[channel], servoMaxAngles[channel]);
+}
+
 // Handles incoming serial commands and controls the robotic arm accordingly.
 void handleSerial() {
   if (Serial.available()) {
@@ -37,11 +42,13 @@ void handleSerial() {
         }
 
         // Move servos to calculated joint angles (convert radians to degrees).
-        smoothMove(0, a.theta0 * 180.0 / M_PI);  // Base rotation.
-        smoothMove(1, a.theta1 * 180.0 / M_PI);  // Shoulder.
-        smoothMove(2, a.theta2 * 180.0 / M_PI);  // Elbow.
+        smoothMove(0, clampAngle(a.theta0 * 180.0 / M_PI, 0));  // Base rotation.
+        smoothMove(1, clampAngle(a.theta1 * 180.0 / M_PI, 1));  // Shoulder.
+        smoothMove(2, clampAngle(a.theta2 * 180.0 / M_PI, 2));  // Elbow.
+
         Serial.println("Moved.");
-      } else {
+      } 
+      else {
         Serial.println("ERROR: Invalid GOTO format.");
       }
     } 
