@@ -4,7 +4,7 @@ This project implements inverse kinematics for a 6 degrees-of-freedom (6 DoF) ro
 
 ---
 
-## 📁 Project Structure
+## :file_folder: Project Structure
 
 ```
 Inverse_Kinematics_Arduino_6DoF/
@@ -16,7 +16,7 @@ Inverse_Kinematics_Arduino_6DoF/
 
 ---
 
-## 🩾 Hardware Used
+## :computer: Hardware Used
 
 - 6x MG996R Servo Motors  
 - PCA9685 16-Channel PWM Driver  
@@ -26,7 +26,7 @@ Inverse_Kinematics_Arduino_6DoF/
 
 ---
 
-## 💡 Features
+## :bulb: Features
 
 - Supports inverse kinematics for the following 4 joints:
   - Base rotation (shoulder rotate)
@@ -39,7 +39,7 @@ Inverse_Kinematics_Arduino_6DoF/
 
 ---
 
-## 🔧 How to Use
+## :wrench: How to Use
 
 1. Clone or download this repository.  
 2. Ensure the folder name matches the `.ino` filename.  
@@ -66,7 +66,7 @@ Where:
 
 ---
 
-## 🧲 IK Solver Details
+## :mag_right: IK Solver Details
 
 - The IK model includes link lengths and joint offsets:
   - `L1`: Height from base to shoulder rotate (85 mm)
@@ -79,6 +79,6 @@ Where:
 
 ---
 
-## 🧬 License
+## :notebook_with_decorative_cover: License
 
 MIT License — free to use, modify, and distribute.
