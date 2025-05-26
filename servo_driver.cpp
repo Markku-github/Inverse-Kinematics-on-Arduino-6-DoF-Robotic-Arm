@@ -2,9 +2,7 @@
 #include "servo_driver.h"
 #include <Wire.h>
 #include <Adafruit_PWMServoDriver.h>
-
-const int MinAngle = 45;  // Gripper channel number.
-const int MaxAngle = 170;  // Gripper channel number.
+#include <Arduino.h>
 
 Adafruit_PWMServoDriver pwm = Adafruit_PWMServoDriver();
 int servoAngles[16] = {0};
@@ -50,7 +48,7 @@ int getServoAngle(int channel) {
 */
 void smoothMove(int channel, float targetAngle, float durationMs) {
   int currentAngle = getServoAngle(channel);
-  int steps = 100;
+  int steps = 200;
   float stepDelay = durationMs / steps;
   float stepSize = (targetAngle - currentAngle) / steps;
 
