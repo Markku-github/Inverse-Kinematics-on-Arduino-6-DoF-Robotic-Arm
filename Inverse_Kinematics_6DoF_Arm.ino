@@ -8,10 +8,12 @@ void setup() {
   initServos();
 
   // Set angle limits for all servos.
-  setServoLimits(0, 0, 180);  // Base.
-  setServoLimits(1, 45, 180); // Shoulder.
-  setServoLimits(2, 10, 170); // Elbow.
-  setServoLimits(5, 87, 145); // Gripper.
+  setServoLimits(ShoulderRotate, 0, 180); // Shoulder rotate a.k.a the base.
+  setServoLimits(ShoulderTilt, 20, 180);  // Shoulder.
+  setServoLimits(Elbow, 10, 170);         // Elbow.
+  setServoLimits(WristTilt, 0, 180);      // Wrist tilt.
+  setServoLimits(WristRotate, 0, 180);    // Wrist rotate.
+  setServoLimits(Gripper, 87, 145);       // Gripper.
 
   Serial.println("Ready.");
 }
