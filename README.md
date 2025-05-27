@@ -1,6 +1,7 @@
 # Inverse Kinematics on Arduino: 6 DoF Robotic Arm
 
 This project implements inverse kinematics for a 6 degrees-of-freedom (6 DoF) robotic arm using an Arduino Uno, MG996R servo motors, and a PCA9685 PWM driver. The arm accepts 3D Cartesian coordinates and a desired wrist tilt angle, and computes joint angles to reach the target position while aligning the wrist with a global Z-axis reference.
+The project introduction and documentation can be found under the docs folder.
 
 ---
 
